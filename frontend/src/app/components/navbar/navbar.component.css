@@ -1,0 +1,11 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.logo {
+  text-align: right;
+}
+
+.navbar-link {
+  padding-right: 1rem;
+}
