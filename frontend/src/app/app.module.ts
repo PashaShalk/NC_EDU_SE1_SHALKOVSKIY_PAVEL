@@ -17,6 +17,7 @@ import {MatCardModule} from '@angular/material/card';
 import { LoginPageComponent } from './pages/login/login-page.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { RegistrationPageComponent } from './pages/registration/registration-page.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     LoginComponent,
     LoginPageComponent,
     RegistrationComponent,
+    RegistrationPageComponent,
   ],
   imports: [
     BrowserModule,
