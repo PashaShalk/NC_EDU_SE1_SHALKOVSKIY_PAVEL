@@ -9,6 +9,13 @@ import {FormControl, Validators, FormGroup} from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   constructor() { }
+  // form: FormGroup = new FormGroup({
+  //   username: new FormControl(''),
+  //   password: new FormControl(''),
+  // });
+  @Input() error: string | null;
+
+  @Output() submitEM = new EventEmitter();
 
   email = new FormControl('', [Validators.required, Validators.email]);
   hide  = true;
@@ -16,9 +23,15 @@ export class LoginComponent implements OnInit {
     username: new FormControl(''),
     password: new FormControl(''),
   });
-  @Input() error: string | null;
+  // @Input() error: string | null;
+  //
+  // @Output() submitEM = new EventEmitter();
 
-  @Output() submitEM = new EventEmitter();
+  submit() {
+    if (this.form.valid) {
+      this.submitEM.emit(this.form.value);
+    }
+  }
 
   ngOnInit(): void {
   }
@@ -31,10 +44,11 @@ export class LoginComponent implements OnInit {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
-  submit() {
-    if (this.form.valid) {
-      this.submitEM.emit(this.form.value);
-    }
-  }
+  // submit() {
+  //   if (this.form.valid) {
+  //     this.submitEM.emit(this.form.value);
+  //   }
+  // }
 
 }
+

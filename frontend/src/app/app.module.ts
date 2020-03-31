@@ -13,6 +13,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import { LoginPageComponent } from './pages/login/login-page.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import {MatIconModule} from '@angular/material/icon';
     NavbarComponent,
     FooterComponent,
     LoginComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +35,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
