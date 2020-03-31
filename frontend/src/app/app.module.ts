@@ -15,6 +15,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import { LoginPageComponent } from './pages/login/login-page.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { LoginPageComponent } from './pages/login/login-page.component';
     FooterComponent,
     LoginComponent,
     LoginPageComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +39,7 @@ import { LoginPageComponent } from './pages/login/login-page.component';
     MatInputModule,
     MatIconModule,
     MatCardModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

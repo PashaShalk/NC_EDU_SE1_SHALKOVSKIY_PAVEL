@@ -6,6 +6,6 @@
   text-align: right;
 }
 
-.navbar-link {
-  padding-right: 1rem;
+.top-toolbar{
+  box-shadow: 0 0 3px;
 }

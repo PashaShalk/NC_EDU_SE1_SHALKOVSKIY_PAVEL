@@ -1,0 +1,48 @@
+<mat-card>
+  <br>
+  <mat-card-title>Registration</mat-card-title>
+  <br>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Nickname</mat-label>
+        <input matInput maxlength="20">
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput maxlength="20">
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Surname</mat-label>
+        <input matInput maxlength="20">
+      </mat-form-field>
+    </p>
+
+    <p>
+      <textarea matInput>About myself</textarea>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your password</mat-label>
+        <input matInput maxlength="20" [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </p>
+
+    <div class="button">
+      <button type="submit" mat-button>Registration</button>
+    </div>
+    <br>
+    </form>
+  </mat-card-content>
+</mat-card>
