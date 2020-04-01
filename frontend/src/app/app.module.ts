@@ -18,6 +18,7 @@ import { LoginPageComponent } from './pages/login/login-page.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { RegistrationPageComponent } from './pages/registration/registration-page.component';
+import { SearchBoxComponent } from './components/search-box/search-box.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RegistrationPageComponent } from './pages/registration/registration-pag
     LoginPageComponent,
     RegistrationComponent,
     RegistrationPageComponent,
+    SearchBoxComponent,
   ],
   imports: [
     BrowserModule,

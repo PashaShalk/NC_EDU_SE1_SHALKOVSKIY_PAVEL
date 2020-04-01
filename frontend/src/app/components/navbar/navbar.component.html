@@ -1,10 +1,12 @@
 <div class="top-toolbar">
   <mat-toolbar>
     <a class="logo">Momentum</a>
+
+    <app-search-box></app-search-box>
     <div class="spacer"></div>
-    <a routerLink="/login" mat-button>Log in</a>
-    <a routerLink="/registration" mat-button>Sign in</a>
-    <a routerLink="#" mat-button>Account</a>
+    <a routerLink="/login" routerLinkActive="active-link" mat-button>Log in</a>
+    <a routerLink="/registration" routerLinkActive="active-link" mat-button>Sign in</a>
+    <a routerLink="#" routerLinkActive="active-link" mat-button>Account</a>
     <!--<a routerLink="#" mat-button></a>-->
   </mat-toolbar>
 </div>
