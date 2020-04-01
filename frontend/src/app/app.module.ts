@@ -20,6 +20,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { RegistrationPageComponent } from './pages/registration/registration-page.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { PostComponent } from './components/post/post.component';
+import { PostMenuComponent } from './components/post-menu/post-menu.component';
+import { MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { PostComponent } from './components/post/post.component';
     RegistrationPageComponent,
     SearchBoxComponent,
     PostComponent,
+    PostMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { PostComponent } from './components/post/post.component';
     MatIconModule,
     MatCardModule,
     MatCheckboxModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

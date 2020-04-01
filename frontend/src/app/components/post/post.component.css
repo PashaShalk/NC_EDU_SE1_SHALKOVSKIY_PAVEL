@@ -12,3 +12,7 @@
   justify-content: center;
   margin: 20px 0px;
 }
+
+.spacer {
+  flex: 1 1 auto;
+}
