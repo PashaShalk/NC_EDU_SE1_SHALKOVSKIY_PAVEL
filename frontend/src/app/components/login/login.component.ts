@@ -7,48 +7,19 @@ import {FormControl, Validators, FormGroup} from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  constructor() { }
-  // form: FormGroup = new FormGroup({
-  //   username: new FormControl(''),
-  //   password: new FormControl(''),
-  // });
-  @Input() error: string | null;
-
   @Output() submitEM = new EventEmitter();
 
-  email = new FormControl('', [Validators.required, Validators.email]);
-  hide  = true;
-  form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-  });
-  // @Input() error: string | null;
-  //
-  // @Output() submitEM = new EventEmitter();
-
-  submit() {
-    if (this.form.valid) {
-      this.submitEM.emit(this.form.value);
-    }
-  }
+  hide;
+  rememberMe;
+  loginForm: FormGroup;
 
   ngOnInit(): void {
+    this.hide = true;
+    this.rememberMe = false;
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+    });
   }
-
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter a value';
-    }
-
-    return this.email.hasError('email') ? 'Not a valid email' : '';
-  }
-
-  // submit() {
-  //   if (this.form.valid) {
-  //     this.submitEM.emit(this.form.value);
-  //   }
-  // }
-
 }
 

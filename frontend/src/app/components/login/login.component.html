@@ -3,36 +3,33 @@
   <mat-card-title>Login</mat-card-title>
   <br>
   <mat-card-content>
-    <form [formGroup]="form" (ngSubmit)="submit()">
-
+    <form [formGroup]="loginForm">
       <p>
         <mat-form-field appearance="outline">
           <mat-label>username</mat-label>
-          <input matInput maxlength="20" placeholder="pat@example.com" [formControl]="email" >
-          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+          <input matInput maxlength="20" placeholder="pat@example.com" [formControl]="loginForm.controls['email']">
+          <mat-error *ngIf="loginForm.controls['email'].touched && !loginForm.controls['email'].valid">
+            {{loginForm.controls['email'].value?'Not a valid email':'You must enter a email'}}
+          </mat-error>
         </mat-form-field>
       </p>
-
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Enter your password</mat-label>
-          <input matInput maxlength="20" [type]="hide ? 'password' : 'text'">
+          <input matInput maxlength="20" [type]="hide ? 'password' : 'text'"
+                 [formControl]="loginForm.controls['password']">
+          <mat-error *ngIf="loginForm.controls['password'].touched && !loginForm.controls['password'].value">
+            You must enter a password
+          </mat-error>
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
       </p>
-
-      <p *ngIf="error" class="error">
-        {{ error }}
-      </p>
-
-      <mat-checkbox>Remember me</mat-checkbox>
-
+      <mat-checkbox color="primary" [(ngModel)]="rememberMe" [ngModelOptions]="{standalone: true}">Remember me</mat-checkbox>
       <div class="button">
-        <button type="submit" mat-button>Login</button>
+        <button mat-stroked-button [disabled]="!loginForm.valid">Login</button>
       </div>
-
     </form>
   </mat-card-content>
 </mat-card>
