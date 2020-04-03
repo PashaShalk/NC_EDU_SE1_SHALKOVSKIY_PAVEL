@@ -8,25 +8,15 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor() {
-  }
+  hide;
+  registrationForm: FormGroup;
 
-  @Input() error: string | null;
-
-  @Output() submitEM = new EventEmitter();
-
-  hide = true;
-  form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-  });
-
-    submit() {
-      if (this.form.valid) {
-        this.submitEM.emit(this.form.value);
-      }
-    }
   ngOnInit(): void {
+      this.hide = true;
+      this.registrationForm = new FormGroup({
+        username: new FormControl(''),
+        password: new FormControl(''),
+      });
   }
 }
 
