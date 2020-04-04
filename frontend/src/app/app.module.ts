@@ -23,6 +23,7 @@ import { PostMenuComponent } from './components/post-menu/post-menu.component';
 import { MatMenuModule} from '@angular/material/menu';
 import {RouterModule} from '@angular/router';
 import {Routes} from './routes/routes';
+import { FeedPageComponent } from './pages/feed-page/feed-page.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {Routes} from './routes/routes';
     SearchBoxComponent,
     PostComponent,
     PostMenuComponent,
+    FeedPageComponent,
   ],
   imports: [
     BrowserModule,
