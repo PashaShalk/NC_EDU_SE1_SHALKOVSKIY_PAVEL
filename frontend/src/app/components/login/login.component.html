@@ -25,10 +25,13 @@
           </button>
         </mat-form-field>
       </p>
-      <mat-checkbox color="primary" [(ngModel)]="rememberMe" [ngModelOptions]="{standalone: true}">Remember me</mat-checkbox>
+      <mat-checkbox color="primary" [(ngModel)]="rememberMe" [ngModelOptions]="{standalone: true}">Remember me</mat-checkbox><br><br>
       <div class="button">
         <button mat-stroked-button [disabled]="!loginForm.valid">Login</button>
       </div>
+      <br><p class="link">
+        Don't have an account?<a routerLink="/registration"><span>Sign up</span></a>
+      </p>
     </form>
   </mat-card-content>
 </mat-card>

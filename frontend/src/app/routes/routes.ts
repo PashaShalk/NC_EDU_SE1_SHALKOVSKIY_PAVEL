@@ -4,5 +4,5 @@ import {RegistrationPageComponent} from '../pages/registration/registration-page
 export const Routes = [
   {path: 'login', component: LoginPageComponent},
   {path: 'registration', component: RegistrationPageComponent},
-  {path: '**', redirectTo: ''}
+  {path: '**', redirectTo: '/login'}
 ];
