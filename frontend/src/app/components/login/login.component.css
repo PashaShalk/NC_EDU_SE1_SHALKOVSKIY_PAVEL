@@ -16,8 +16,8 @@
   min-width: 300px;
 }
 
-mat-card-title,
-mat-card-content {
+.mat-card-title,
+.mat-card-content {
   display: flex;
   justify-content: center;
 }

@@ -6,57 +6,80 @@
     <form [formGroup]="registrationForm">
       <p>
         <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput maxlength="254" placeholder="pat@example.com" [formControl]="registrationForm.controls['email']" required>
+          <mat-error>
+            {{registrationForm.controls['email'].value?'Not a valid email':'You must enter a Email'}}
+          </mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="field" appearance="outline">
           <mat-label>Nickname</mat-label>
-          <input matInput maxlength="20">
+          <input matInput maxlength="30" formControlName="nickname" required>
+          <mat-error>
+            {{registrationForm.controls['nickname'].value?'Nickname must be at least 5 characters':'You must enter a Nickname'}}
+          </mat-error>
         </mat-form-field>
       </p>
-
       <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Name</mat-label>
-          <input matInput maxlength="20">
+        <mat-form-field class="left-field" appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input matInput maxlength="30" formControlName="firstName" required>
+          <mat-error>
+            {{registrationForm.controls['firstName'].value?'First Name must be at least 5 characters':'You must enter a First Name'}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="right-field" appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput maxlength="30" formControlName="lastName" required>
+          <mat-error>
+            {{registrationForm.controls['lastName'].value?'Last Name must be at least 5 characters':'You must enter a Last Name'}}
+          </mat-error>
         </mat-form-field>
       </p>
-
       <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Surname</mat-label>
-          <input matInput maxlength="20">
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field appearance="outline">
+        <mat-form-field class="field" appearance="outline">
           <mat-label>About myself</mat-label>
-          <textarea rows="3" matInput></textarea>
+          <textarea class="about" rows="4" maxlength="280" formControlName="aboutMyself" matInput></textarea>
         </mat-form-field>
       </p><br>
 
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Enter your password</mat-label>
-          <input matInput maxlength="20" [type]="hide ? 'password' : 'text'">
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                  [attr.aria-pressed]="hide">
+      <div formGroupName="passwordGroup">
+        <mat-form-field class="left-field" appearance="outline">
+          <mat-label>Enter password</mat-label>
+          <input matInput maxlength="30" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+          <mat-error>
+            Password must be at least 5 characters
+          </mat-error>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
-      </p>
 
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Repeat your password</mat-label>
-          <input matInput maxlength="20" [type]="hide ? 'password' : 'text'">
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                  [attr.aria-pressed]="hide">
+        <mat-form-field class="right-field" appearance="outline">
+          <mat-label>Confirm password</mat-label>
+          <input matInput maxlength="30" [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" [errorStateMatcher]="confirmValidParentMatcher" required>
+          <mat-error>
+            Passwords must match
+          </mat-error>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
-      </p>
+    </div>
 
+      <br><br><br><br>
       <div class="button">
-        <button type="submit" mat-button>Registration</button>
+        <button mat-stroked-button [disabled]="!registrationForm.valid">Registration</button>
       </div>
+
+      <br>
+      <p class="link">
+        Have an account?<a routerLink="/login">Log in</a>
+      </p>
+
     </form>
   </mat-card-content>
 </mat-card>
