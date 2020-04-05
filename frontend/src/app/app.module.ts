@@ -23,7 +23,12 @@ import { PostMenuComponent } from './components/post-menu/post-menu.component';
 import { MatMenuModule} from '@angular/material/menu';
 import {RouterModule} from '@angular/router';
 import {Routes} from './routes/routes';
-import { FeedPageComponent } from './pages/feed-page/feed-page.component';
+import { FeedPageComponent } from './pages/feed/feed-page.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+import { ReportDialogComponent } from './components/report-dialog/report-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -38,6 +43,7 @@ import { FeedPageComponent } from './pages/feed-page/feed-page.component';
     PostComponent,
     PostMenuComponent,
     FeedPageComponent,
+    ReportDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +59,10 @@ import { FeedPageComponent } from './pages/feed-page/feed-page.component';
     MatCardModule,
     MatCheckboxModule,
     MatMenuModule,
+    MatDividerModule,
+    MatListModule,
+    MatDialogModule,
+    MatButtonToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

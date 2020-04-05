@@ -29,3 +29,9 @@ export class ConfirmValidParentMatcher implements ErrorStateMatcher {
     return control.parent.invalid && control.touched;
   }
 }
+
+export class LoginMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    return control.invalid && control.touched;
+  }
+}

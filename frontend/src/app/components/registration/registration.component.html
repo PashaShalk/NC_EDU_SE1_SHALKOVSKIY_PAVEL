@@ -7,7 +7,7 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
-          <input matInput maxlength="254" placeholder="pat@example.com" [formControl]="registrationForm.controls['email']" required>
+          <input matInput maxlength="254" placeholder="pat@example.com" formControlName="email" required>
           <mat-error>
             {{registrationForm.controls['email'].value?'Not a valid email':'You must enter a Email'}}
           </mat-error>

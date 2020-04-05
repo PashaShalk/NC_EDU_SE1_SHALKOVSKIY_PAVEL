@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ReportDialogComponent} from '../report-dialog/report-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-post-menu',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
+  openReportDialog(): void {
+    this.dialog.open(ReportDialogComponent);
+  }
 }

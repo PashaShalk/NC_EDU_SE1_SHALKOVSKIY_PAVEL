@@ -8,22 +8,30 @@
   </mat-card-header>
   <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
   <mat-card-actions>
-    <button mat-icon-button color="warn">
+    <button mat-icon-button (click)="changeLikeStatus()" [color]="likeStatus?'basic':'warn'">
       <mat-icon>thumb_up_alt</mat-icon>
     </button>
-    <button mat-icon-button>
+    <button mat-icon-button (click)="changeDislikeStatus()" [color]="dislikeStatus?'basic':'warn'">
       <mat-icon >thumb_down_alt</mat-icon>
     </button>
   </mat-card-actions>
   <mat-card-content>
     <p>
-      Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+      <strong>Shiba Inu</strong> is the smallest of the six original and distinct spitz breeds of dog from Japan.
       A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
       bred for hunting.
     </p>
+    <div class="comments">
+      <p><strong>username</strong> comments</p>
+      <p><strong>username</strong> comments</p>
+      <p><strong>username</strong> comments</p>
+    </div>
     <h4>02.04.2020</h4>
-    <hr>
-    <input>
+    <mat-divider></mat-divider>
+    <form [formGroup]="commentForm">
+      <input class="comment" type="text" formControlName="comment" placeholder="Add a comment" (input)="commentTouched = !commentTouched">
+      <button class="post" mat-flat-button color="primary" [disabled]="!commentForm.controls['comment'].value">Post</button>
+    </form>
   </mat-card-content>
 
 </mat-card>

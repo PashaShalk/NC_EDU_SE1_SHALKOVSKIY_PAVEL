@@ -7,8 +7,8 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
-          <input matInput maxlength="254" placeholder="pat@example.com" [formControl]="loginForm.controls['email']">
-          <mat-error *ngIf="loginForm.controls['email'].touched && !loginForm.controls['email'].valid">
+          <input matInput maxlength="254" placeholder="pat@example.com" formControlName="email" [errorStateMatcher]="loginMatcher">
+          <mat-error>
             {{loginForm.controls['email'].value?'Not a valid email':'You must enter a email'}}
           </mat-error>
         </mat-form-field>
@@ -16,8 +16,8 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Enter your password</mat-label>
-          <input matInput maxlength="30" [type]="hide ? 'password' : 'text'" [formControl]="loginForm.controls['password']">
-          <mat-error *ngIf="loginForm.controls['password'].touched && !loginForm.controls['password'].valid">
+          <input matInput maxlength="30" [type]="hide ? 'password' : 'text'" formControlName="password" [errorStateMatcher]="loginMatcher">
+          <mat-error>
             {{loginForm.controls['password'].value?'Password must be at least 5 characters':'You must enter a password'}}
           </mat-error>
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
