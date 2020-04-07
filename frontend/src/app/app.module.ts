@@ -29,6 +29,7 @@ import {MatListModule} from '@angular/material/list';
 import { ReportDialogComponent } from './components/report-dialog/report-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { ImageCarouselComponent } from './components/image-carousel/image-carousel.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     PostMenuComponent,
     FeedPageComponent,
     ReportDialogComponent,
+    ImageCarouselComponent,
   ],
   imports: [
     BrowserModule,
