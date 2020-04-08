@@ -6,15 +6,17 @@
     <div class="spacer"></div>
     <app-post-menu></app-post-menu>
   </mat-card-header>
-  <app-image-carousel mat-card-image style="width: 100%"></app-image-carousel>
+  <app-image-carousel mat-card-image></app-image-carousel>
   <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
   <mat-card-actions>
     <button mat-icon-button (click)="changeLikeStatus()" [color]="likeStatus?'basic':'warn'">
       <mat-icon>thumb_up_alt</mat-icon>
     </button>
+    <span>123</span>
     <button mat-icon-button (click)="changeDislikeStatus()" [color]="dislikeStatus?'basic':'warn'">
       <mat-icon >thumb_down_alt</mat-icon>
     </button>
+    <span>19</span>
   </mat-card-actions>
   <mat-card-content>
     <p>
