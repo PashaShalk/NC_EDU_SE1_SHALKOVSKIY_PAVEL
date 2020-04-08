@@ -31,6 +31,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {ImageCarouselComponent} from './components/image-carousel/image-carousel.component';
 import { AccountPageComponent } from './pages/account/account-page.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { ImagesGridListComponent } from './components/images-grid-list/images-grid-list.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { AccountPageComponent } from './pages/account/account-page.component';
     ReportDialogComponent,
     ImageCarouselComponent,
     AccountPageComponent,
+    ImagesGridListComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +70,7 @@ import { AccountPageComponent } from './pages/account/account-page.component';
     MatListModule,
     MatDialogModule,
     MatButtonToggleModule,
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
