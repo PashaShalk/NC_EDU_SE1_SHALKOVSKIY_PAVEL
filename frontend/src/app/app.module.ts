@@ -30,6 +30,7 @@ import {ReportDialogComponent} from './components/report-dialog/report-dialog.co
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {ImageCarouselComponent} from './components/image-carousel/image-carousel.component';
+import { AccountPageComponent } from './pages/account/account-page.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {ImageCarouselComponent} from './components/image-carousel/image-carousel
     FeedPageComponent,
     ReportDialogComponent,
     ImageCarouselComponent,
+    AccountPageComponent,
   ],
   imports: [
     BrowserModule,
