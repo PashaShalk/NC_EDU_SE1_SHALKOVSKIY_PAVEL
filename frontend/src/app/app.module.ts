@@ -76,6 +76,6 @@ import { AccountHeaderComponent } from './components/account-header/account-head
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ReportDialogComponent]
+  entryComponents: [ReportDialogComponent, PostComponent]
 })
 export class AppModule { }

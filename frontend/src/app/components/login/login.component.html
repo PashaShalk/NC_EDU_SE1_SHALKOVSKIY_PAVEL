@@ -27,7 +27,7 @@
       </p>
       <mat-checkbox color="primary" [(ngModel)]="rememberMe" [ngModelOptions]="{standalone: true}">Remember me</mat-checkbox><br><br>
       <div class="button">
-        <button mat-stroked-button [disabled]="!loginForm.valid">Login</button>
+        <button mat-stroked-button [disabled]="!loginForm.valid" (click)="logIn($event)">Login</button>
       </div>
       <br><p class="link">
         Don't have an account?<a routerLink="/registration"><span>Sign up</span></a>
