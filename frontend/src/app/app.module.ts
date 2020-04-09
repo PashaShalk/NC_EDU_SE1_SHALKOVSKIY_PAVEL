@@ -33,6 +33,7 @@ import {ImageCarouselComponent} from './components/image-carousel/image-carousel
 import { AccountPageComponent } from './pages/account/account-page.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ImagesGridListComponent } from './components/images-grid-list/images-grid-list.component';
+import { AccountHeaderComponent } from './components/account-header/account-header.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ImagesGridListComponent } from './components/images-grid-list/images-gr
     ImageCarouselComponent,
     AccountPageComponent,
     ImagesGridListComponent,
+    AccountHeaderComponent,
   ],
   imports: [
     BrowserModule,
