@@ -35,6 +35,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { ImagesGridListComponent } from './components/images-grid-list/images-grid-list.component';
 import { AccountHeaderComponent } from './components/account-header/account-header.component';
 import { AddPostComponent } from './pages/add-post/add-post.component';
+import { HashtagPageComponent } from './pages/hashtag-page/hashtag-page.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { AddPostComponent } from './pages/add-post/add-post.component';
     ImagesGridListComponent,
     AccountHeaderComponent,
     AddPostComponent,
+    HashtagPageComponent,
   ],
   imports: [
     BrowserModule,
