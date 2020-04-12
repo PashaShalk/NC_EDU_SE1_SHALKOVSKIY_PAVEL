@@ -36,6 +36,8 @@ import { ImagesGridListComponent } from './components/images-grid-list/images-gr
 import { AccountHeaderComponent } from './components/account-header/account-header.component';
 import { AddPostComponent } from './pages/add-post/add-post.component';
 import { HashtagPageComponent } from './pages/hashtag-page/hashtag-page.component';
+import { ReportsPageComponent } from './pages/reports-page/reports-page.component';
+import { UsersPageComponent } from './pages/users-page/users-page.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { HashtagPageComponent } from './pages/hashtag-page/hashtag-page.componen
     AccountHeaderComponent,
     AddPostComponent,
     HashtagPageComponent,
+    ReportsPageComponent,
+    UsersPageComponent,
   ],
   imports: [
     BrowserModule,
