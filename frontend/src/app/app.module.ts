@@ -34,10 +34,11 @@ import { AccountPageComponent } from './pages/account/account-page.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ImagesGridListComponent } from './components/images-grid-list/images-grid-list.component';
 import { AccountHeaderComponent } from './components/account-header/account-header.component';
-import { AddPostComponent } from './pages/add-post/add-post.component';
 import { HashtagPageComponent } from './pages/hashtag-page/hashtag-page.component';
 import { ReportsPageComponent } from './pages/reports-page/reports-page.component';
 import { UsersPageComponent } from './pages/users-page/users-page.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import { AddPostDialogComponent } from './components/add-post-dialog/add-post-dialog.component';
 
 @NgModule({
   declarations: [
@@ -57,10 +58,10 @@ import { UsersPageComponent } from './pages/users-page/users-page.component';
     AccountPageComponent,
     ImagesGridListComponent,
     AccountHeaderComponent,
-    AddPostComponent,
     HashtagPageComponent,
     ReportsPageComponent,
     UsersPageComponent,
+    AddPostDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +82,7 @@ import { UsersPageComponent } from './pages/users-page/users-page.component';
     MatDialogModule,
     MatButtonToggleModule,
     MatGridListModule,
+    MatBadgeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {AddPostDialogComponent} from '../add-post-dialog/add-post-dialog.component';
 
 @Component({
   selector: 'app-account-header',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
+  }
+
+  openAddPostDialog(): void {
+    this.dialog.open(AddPostDialogComponent, {autoFocus: false});
   }
 
 }
