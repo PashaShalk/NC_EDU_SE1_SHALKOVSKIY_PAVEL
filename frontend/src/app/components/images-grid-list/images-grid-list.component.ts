@@ -15,7 +15,7 @@ export class ImagesGridListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openReportDialog(): void {
+  openDialog(): void {
     this.dialog.open(PostComponent, {autoFocus: false, maxHeight: '90vh'});
   }
 }

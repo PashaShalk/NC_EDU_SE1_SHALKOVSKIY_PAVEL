@@ -5,11 +5,11 @@
 
     <app-search-box></app-search-box>
     <div class="spacer"></div>
+    <button routerLink="/reports" routerLinkActive="active-link" mat-button matBadge="15" matBadgePosition="before" matBadgeColor="primary">Reports</button>
     <a routerLink="" routerLinkActive="active-link" mat-button  [routerLinkActiveOptions]="{exact: true}">Feed</a>
     <a routerLink="/account" routerLinkActive="active-link" mat-button>Account</a>
     <a routerLink="/users" routerLinkActive="active-link" mat-button>Users</a>
     <a routerLink="#" mat-button>Log Out</a>
-    <button routerLink="/reports" routerLinkActive="active-link" mat-button matBadge="15" matBadgePosition="after" matBadgeColor="primary">Reports</button>
 
     <!--<a routerLink="#" mat-button></a>-->
   </mat-toolbar>

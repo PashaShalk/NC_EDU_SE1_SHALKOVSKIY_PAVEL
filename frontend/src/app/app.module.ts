@@ -39,6 +39,7 @@ import { ReportsPageComponent } from './pages/reports-page/reports-page.componen
 import { UsersPageComponent } from './pages/users-page/users-page.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import { AddPostDialogComponent } from './components/add-post-dialog/add-post-dialog.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { AddPostDialogComponent } from './components/add-post-dialog/add-post-di
     MatButtonToggleModule,
     MatGridListModule,
     MatBadgeModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent],

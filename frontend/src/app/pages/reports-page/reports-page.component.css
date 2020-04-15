@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  justify-content: center;
+  /*margin: 100px 0px;*/
+}
+table {
+  margin-top: 10px;
+  min-width: 50%;
+}
+
+.mat-row:hover {
+  background-color: #F0F0F0;
+}
