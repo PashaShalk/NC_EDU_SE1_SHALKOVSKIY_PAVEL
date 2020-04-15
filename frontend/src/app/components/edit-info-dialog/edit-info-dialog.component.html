@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Edit info</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="editInfoForm">
+    <p>
+      <mat-form-field class="left-field" appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput maxlength="30" formControlName="firstName" required>
+        <mat-error>
+          {{editInfoForm.controls['firstName'].value ? 'First Name must be at least 5 characters' : 'You must enter a First Name'}}
+        </mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="right-field" appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput maxlength="30" formControlName="lastName" required>
+        <mat-error>
+          {{editInfoForm.controls['lastName'].value ? 'Last Name must be at least 5 characters' : 'You must enter a Last Name'}}
+        </mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="field" appearance="outline">
+        <mat-label>About myself</mat-label>
+        <textarea class="about" rows="4" maxlength="280" formControlName="aboutMyself" matInput></textarea>
+      </mat-form-field>
+    </p>
+  </form>
+  <div class="form-group">
+    <input type="file"
+           id="file"
+           (change)="handleFileInput($event.target.files)">
+  </div>
+</div>
+<div mat-dialog-actions >
+  <button mat-raised-button>Change</button>
+</div>

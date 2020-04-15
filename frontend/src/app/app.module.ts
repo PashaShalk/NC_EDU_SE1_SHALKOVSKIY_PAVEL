@@ -40,6 +40,7 @@ import { UsersPageComponent } from './pages/users-page/users-page.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import { AddPostDialogComponent } from './components/add-post-dialog/add-post-dialog.component';
 import {MatTableModule} from '@angular/material/table';
+import { EditInfoDialogComponent } from './components/edit-info-dialog/edit-info-dialog.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import {MatTableModule} from '@angular/material/table';
     ReportsPageComponent,
     UsersPageComponent,
     AddPostDialogComponent,
+    EditInfoDialogComponent,
   ],
   imports: [
     BrowserModule,
