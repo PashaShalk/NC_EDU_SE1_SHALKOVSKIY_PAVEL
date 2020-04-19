@@ -2,6 +2,7 @@
 
 <div mat-dialog-content>
   <form [formGroup]="editInfoForm">
+
     <p>
       <mat-form-field class="left-field" appearance="outline">
         <mat-label>First Name</mat-label>
@@ -11,6 +12,7 @@
         </mat-error>
       </mat-form-field>
     </p>
+
     <p>
       <mat-form-field class="right-field" appearance="outline">
         <mat-label>Last Name</mat-label>
@@ -20,18 +22,22 @@
         </mat-error>
       </mat-form-field>
     </p>
+
     <p>
       <mat-form-field class="field" appearance="outline">
         <mat-label>About myself</mat-label>
         <textarea class="about" rows="4" maxlength="280" formControlName="aboutMyself" matInput></textarea>
       </mat-form-field>
     </p>
+
   </form>
+
   <div class="form-group">
     <input type="file"
            id="file"
            (change)="handleFileInput($event.target.files)">
   </div>
+
 </div>
 <div mat-dialog-actions >
   <button mat-raised-button>Change</button>
