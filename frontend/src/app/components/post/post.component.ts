@@ -17,7 +17,6 @@ export class PostComponent implements OnInit {
 
   constructor() {}
 
-
   ngOnInit(): void {
     this.likeStatus = true;
     this.dislikeStatus = true;
