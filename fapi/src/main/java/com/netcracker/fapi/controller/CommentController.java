@@ -3,6 +3,7 @@ package com.netcracker.fapi.controller;
 import com.netcracker.fapi.model.Comment;
 import com.netcracker.fapi.services.impl.CommentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,11 +17,13 @@ public class CommentController {
         this.commentService = commentService;
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/post/{postID}")
     public Comment[] getCommentByPostID(@PathVariable Long postID) {
         return commentService.getCommentByPostID(postID);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/post/{postID}/user/{userID}")
     public void sendComment(@RequestBody String text,
                             @PathVariable Long postID,

@@ -1,23 +1,13 @@
-<div class="image-grid-list">
+<div
+  class="image-grid-list"
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50"
+  (scrolled)="onScroll()"
+>
   <mat-grid-list cols="3" rowHeight="1:1" gutterSize="20px">
-
-    <mat-grid-tile>
-      <img class="grid-image" src="https://material.angular.io/assets/img/examples/shiba2.jpg" (click)="openDialog()">
+    <mat-grid-tile *ngFor="let post of posts">
+      <img class="grid-image" src="{{post?.photoURIs[0]}}" (click)="openDialog(post)">
     </mat-grid-tile>
-    <mat-grid-tile>
-      <img class="grid-image" src="https://i.imgur.com/Rpxx6wU.jpg">
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <img class="grid-image" src="https://i.imgur.com/83fandJ.jpg">
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <img class="grid-image" src="https://i.imgur.com/JiQ9Ppv.jpg">
-    </mat-grid-tile>
-    <mat-grid-tile></mat-grid-tile>
-    <mat-grid-tile></mat-grid-tile>
-    <mat-grid-tile></mat-grid-tile>
-    <mat-grid-tile></mat-grid-tile>
-    <mat-grid-tile></mat-grid-tile>
   </mat-grid-list>
 </div>
-

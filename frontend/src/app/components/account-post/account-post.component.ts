@@ -1,33 +1,35 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Post} from '../../model/post.model';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {ReactionData} from '../../model/reaction-data.model';
+import {Comment} from '../../model/comment.model';
+import {LocalStorageService} from '../../services/local-storage.service';
+import {CommentService} from '../../services/comment.service';
 import {ReactionService} from '../../services/reaction.service';
 import {LSUser} from '../../model/ls-user.model';
-import {LocalStorageService} from '../../services/local-storage.service';
-import {Comment} from '../../model/comment.model';
-import {CommentService} from '../../services/comment.service';
 
 @Component({
-  selector: 'app-post',
-  templateUrl: './post.component.html',
-  styleUrls: ['./post.component.css']
+  selector: 'app-account-post',
+  templateUrl: './account-post.component.html',
+  styleUrls: ['./account-post.component.css']
 })
-export class PostComponent implements OnInit {
+export class AccountPostComponent implements OnInit {
 
-  reactionData: ReactionData;
+  // likeStatus: boolean;
+  // dislikeStatus: boolean;
   commentTouched: boolean;
   commentForm: FormGroup;
-  authorizedUser: LSUser;
+  post: Post;
   avatar: string;
+  authorizedUser: LSUser;
+  reactionData: ReactionData;
   comments: Comment[];
 
-  @Input()
-  post: Post;
-
-  constructor(private reactionService: ReactionService,
-              private localStorageService: LocalStorageService,
-              private commentService: CommentService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Post,
+              private commentService: CommentService,
+              private reactionService: ReactionService,
+              private localStorageService: LocalStorageService) {
   }
 
   private replaceHashtags() {
@@ -38,6 +40,7 @@ export class PostComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.post = this.data;
     this.commentService.getCommentByPostId(this.post.id).subscribe((comments) => {
       this.comments = comments;
     });

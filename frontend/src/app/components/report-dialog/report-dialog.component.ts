@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialogRef} from '@angular/material/dialog';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {ReportService} from '../../services/report.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-report-dialog',
@@ -8,12 +10,24 @@ import {MatDialogRef} from '@angular/material/dialog';
 })
 export class ReportDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<ReportDialogComponent>) { }
+  constructor(public dialogRef: MatDialogRef<ReportDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: number,
+              private reportService: ReportService,
+              private snackBar: MatSnackBar) {
+  }
 
   ngOnInit(): void {
   }
 
-  onNoClick(): void {
+  onClick(report: string): void {
+    if (this.data) {
+      this.reportService.sendReport(this.data, report).subscribe(() => {
+        this.snackBar.open('Report send', 'OK', {
+          duration: 3000,
+          verticalPosition: 'top'
+        });
+      });
+    }
     this.dialogRef.close();
   }
 }

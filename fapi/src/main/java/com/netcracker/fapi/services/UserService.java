@@ -29,4 +29,6 @@ public interface UserService {
     ResponseEntity<byte[]> getAvatar(Long ID) throws IOException;
 
     UserVM updateInfo(UserInfo userInfo, Long ID);
+
+    UserVM getUserByEmail(String email);
 }

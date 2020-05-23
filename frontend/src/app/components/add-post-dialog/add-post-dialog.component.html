@@ -2,15 +2,18 @@
 
 <div mat-dialog-content>
   <div>
-    <input #fileInput style="display: none;" type="file" accept=".jpg, .jpeg, .png" multiple>
-    <button mat-button color="primary" (click)="fileInput.click()">Pick File</button>
+<!--    #fileInput style="display: none;"-->
+    <input type="file"
+           accept=".png"
+           (change)="handleFileInput($event.target.files)"
+           multiple>
+<!--    <button mat-button color="primary" (click)="fileInput.click()">Pick File</button>-->
   </div>
-  fileInpu
   <mat-form-field appearance="outline">
     <mat-label>Description</mat-label>
-    <textarea style="resize: none" rows="4" maxlength="280" matInput></textarea>
+    <textarea style="resize: none" rows="4" maxlength="280" [(ngModel)]="description" matInput></textarea>
   </mat-form-field>
 </div>
-<div mat-dialog-actions >
-  <button mat-raised-button>Add</button>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="addPost()" [disabled]="!images || images.length === 0">Add</button>
 </div>

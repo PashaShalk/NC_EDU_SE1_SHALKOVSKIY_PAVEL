@@ -42,3 +42,41 @@
   </mat-card-content>
 
 </mat-card>
+<!--<mat-card class="example-card">-->
+<!--  <mat-card-header>-->
+<!--    <img mat-card-avatar [src]="avatar" routerLink="/user/{{post.author.nickname}}">-->
+<!--    <mat-card-title routerLink="/user/{{post.author.nickname}}">{{post.author.nickname}}</mat-card-title>-->
+<!--    <mat-card-subtitle>{{post.author.firstName}} {{post.author.lastName}}</mat-card-subtitle>-->
+<!--    <div class="spacer"></div>-->
+<!--    <app-post-menu></app-post-menu>-->
+<!--  </mat-card-header>-->
+<!--  <app-image-carousel [photoURIs]="post?.photoURIs" mat-card-image></app-image-carousel>-->
+<!--  <mat-card-actions>-->
+<!--    <button mat-icon-button (click)="changeLikeStatus()" [color]="reactionData.likeStatus?'warn':'basic'">-->
+<!--      <mat-icon>thumb_up_alt</mat-icon>-->
+<!--    </button>-->
+<!--    <span>{{reactionData.likes}}</span>-->
+<!--    <button mat-icon-button (click)="changeDislikeStatus()" [color]="reactionData.dislikeStatus?'warn':'basic'">-->
+<!--      <mat-icon>thumb_down_alt</mat-icon>-->
+<!--    </button>-->
+<!--    <span>{{reactionData.dislikes}}</span>-->
+<!--  </mat-card-actions>-->
+<!--  <mat-card-content>-->
+<!--    <p *ngIf="post.description">-->
+<!--      <strong routerLink="/user/{{post.author.nickname}}">{{post.author.nickname}}: </strong> <span-->
+<!--      [innerHTML]="post.description"></span>-->
+<!--    </p>-->
+<!--    <div class="comments">-->
+<!--      <p><strong>username:</strong> comments</p>-->
+<!--    </div>-->
+<!--    <h4>{{post.date | date: 'dd.MM.yyyy'}}</h4>-->
+<!--    <mat-divider></mat-divider>-->
+<!--    <form [formGroup]="commentForm">-->
+<!--      <input class="comment" type="text" formControlName="comment" placeholder="Add a comment"-->
+<!--             (input)="commentTouched = !commentTouched">-->
+<!--      <button class="post" mat-flat-button color="primary" [disabled]="!commentForm.controls['comment'].value">Post-->
+<!--      </button>-->
+<!--    </form>-->
+<!--  </mat-card-content>-->
+
+<!--</mat-card>-->

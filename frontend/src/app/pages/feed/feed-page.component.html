@@ -1,1 +1,11 @@
-<app-post></app-post>
+<div *ngIf="posts"
+  class="image-grid-list"
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50"
+  (scrolled)="onScroll()"
+>
+  <div *ngFor="let post of posts">
+    <app-post *ngIf="posts" [post]="post"></app-post>
+  </div>
+</div>

@@ -21,6 +21,7 @@ public class UserController {
 
     @PostMapping("/authorization")
     public User authorizeUser(@RequestBody LoginData loginData) {
+        System.out.println(loginData);
         return userService.authorize(loginData.getEmail(), loginData.getPassword());
     }
 
@@ -37,6 +38,11 @@ public class UserController {
     @GetMapping("/nickname/{nickname}")
     public User getUserByNickname(@PathVariable String nickname) {
         return userService.getUserByNickname(nickname);
+    }
+
+    @GetMapping("/email/{email}")
+    public User getUserByEmail(@PathVariable String email) {
+        return userService.getUserByEmail(email);
     }
 
     @GetMapping("/page/{page}/count/{count}")

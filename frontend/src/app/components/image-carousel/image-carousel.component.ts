@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-image-carousel',
@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImageCarouselComponent implements OnInit {
 
-  // images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+  constructor() {
+  }
 
-  constructor() { }
+  @Input()
+  photoURIs: string[];
 
   ngOnInit(): void {
   }

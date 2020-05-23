@@ -51,3 +51,13 @@
   justify-content: center;
 }
 
+.error {
+  color: #b0272d;
+  display: flex;
+  justify-content: center;
+}
+
+.question {
+  margin-right: 5px;
+}
+

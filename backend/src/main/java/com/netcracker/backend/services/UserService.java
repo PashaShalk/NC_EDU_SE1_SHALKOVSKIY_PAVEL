@@ -24,4 +24,6 @@ public interface UserService {
     void unblockUser(Long ID);
 
     User updateUser(User user);
+
+    User getUserByEmail(String email);
 }

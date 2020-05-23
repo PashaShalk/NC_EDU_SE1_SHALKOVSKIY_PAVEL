@@ -7,6 +7,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,10 +20,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-@Service
-public class UserServiceImpl implements UserService {
+@Service("UserService")
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Value("${backend.url}/api/users")
     private String backendURI;
@@ -28,9 +35,12 @@ public class UserServiceImpl implements UserService {
 
     private final RestTemplate restTemplate;
 
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
-    public UserServiceImpl(RestTemplateBuilder builder) {
+    public UserServiceImpl(RestTemplateBuilder builder, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.restTemplate = builder.build();
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
@@ -58,7 +68,7 @@ public class UserServiceImpl implements UserService {
                     .firstName(registeredUser.getFirstName())
                     .lastName(registeredUser.getLastName())
                     .profileDescription(registeredUser.getProfileDescription())
-                    .password(registeredUser.getPassword())
+                    .password(bCryptPasswordEncoder.encode(registeredUser.getPassword()))
                     .build();
 
             User newUser = restTemplate.postForEntity(backendURI + "/registration",
@@ -80,6 +90,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVM getUserByNickname(String nickname) {
         User user = restTemplate.getForEntity(backendURI + "/nickname/" + nickname, User.class).getBody();
+        return convertToUserVM(user);
+    }
+
+    @Override
+    public UserVM getUserByEmail(String email) {
+        User user = restTemplate.getForEntity(backendURI + "/email/" + email, User.class).getBody();
         return convertToUserVM(user);
     }
 
@@ -155,5 +171,24 @@ public class UserServiceImpl implements UserService {
                     .build();
         }
         return null;
+    }
+
+    private Set<SimpleGrantedAuthority> getAuthority(User user) {
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().getRole()));
+        return authorities;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = findByEmail(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
+    }
+
+    private User findByEmail(String email) {
+        return restTemplate.getForEntity(backendURI + "/email/" + email, User.class).getBody();
     }
 }

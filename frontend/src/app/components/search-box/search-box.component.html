@@ -1,6 +1,6 @@
 <div class="search-box">
-  <input class="search-txt" type="text" name="" placeholder="Type to search">
-  <a class="search-btn" routerLink="/hashtag">
+    <input (keydown.enter)="search($event)" class="search-txt" type="text" name="" placeholder="Type to search" (keyup)="search($event)">
+  <a class="search-btn" routerLink="/hashtag/{{hashtag}}">
     <mat-icon>search</mat-icon>
   </a>
 </div>

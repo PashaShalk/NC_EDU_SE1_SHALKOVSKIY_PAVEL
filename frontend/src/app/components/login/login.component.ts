@@ -1,8 +1,8 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoginMatcher} from '../custom-validator';
 import {LocalStorageService} from '../../services/local-storage.service';
-import {Router} from '@angular/router';
+import {LoginData} from '../../model/login-data.model';
 
 @Component({
   selector: 'app-login',
@@ -11,25 +11,35 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router,
-              private localStorageService: LocalStorageService) {}
+  constructor(private localStorageService: LocalStorageService) {
+  }
 
-  @Output() submitEM = new EventEmitter();
+  @Input()
+  loginError: boolean;
 
-  hide;
-  rememberMe;
+  @Input()
+  bannedUser: boolean;
+
+  @Output()
+  login: EventEmitter<LoginData> = new EventEmitter();
+
+  @Output()
+  remember: EventEmitter<boolean> = new EventEmitter();
+
+  hide: boolean;
+  rememberMe: boolean;
   loginForm: FormGroup;
   loginMatcher = new LoginMatcher();
 
-  logIn(event){
-    console.log(event);
-    this.localStorageService.setItem('credentials', JSON.stringify(event));
-    this.router.navigate(['/']);
+  _login() {
+    this.remember.next(this.rememberMe);
+    this.login.next(this.loginForm.value);
   }
 
   ngOnInit(): void {
     this.hide = true;
     this.rememberMe = false;
+
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required,
         Validators.email,

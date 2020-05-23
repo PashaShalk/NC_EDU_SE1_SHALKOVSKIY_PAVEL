@@ -65,6 +65,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserByEmail(String email) {
+        if (userRepository.findByEmail(email).isPresent()) {
+            User user = userRepository.findByEmail(email).get();
+//            if (!user.getRole().getRole().equals(UserRoleEnum.ADMIN)) {
+                return user;
+//            }
+        }
+        return null;
+    }
+
+    @Override
     public List<User> getAllUsers(Integer page, Integer count) {
         return userRepository.findByRole(userRoleRepository.findByRole(UserRoleEnum.USER),
                 PageRequest.of(page, count));

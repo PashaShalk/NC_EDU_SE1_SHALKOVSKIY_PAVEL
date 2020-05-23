@@ -25,9 +25,9 @@ export class UserService {
     this.$login.next();
   }
 
-  authorizeUser(loginData: LoginData) {
-    return this.http.post<AuthorizedUser>('/api/users/authorization', loginData);
-  }
+  // authorizeUser(loginData: LoginData) {
+  //   return this.http.post<AuthorizedUser>('/api/users/authorization', loginData);
+  // }
 
   registerUser(user: RegisteredUser) {
     return this.http.post<boolean>('/api/users/registration', user);
@@ -66,4 +66,19 @@ export class UserService {
   updateInfo(userInfo: UserInfo, id: number) {
     return this.http.post<User>('api/users/updating/' + id, userInfo);
   }
+
+  getToken(loginData: LoginData) {
+    return this.http.post<AuthToken>('api/token/generate-token', loginData);
+  }
+
+  getUserByEmail(email: string) {
+    return this.http.get<AuthorizedUser>('/api/users/email/' + email);
+  }
+  // authorizeUser(loginData: LoginData) {
+  //   return this.http.post<AuthorizedUser>('/api/users/authorization', loginData);
+  // }
+}
+
+export interface AuthToken {
+  readonly token: string;
 }
