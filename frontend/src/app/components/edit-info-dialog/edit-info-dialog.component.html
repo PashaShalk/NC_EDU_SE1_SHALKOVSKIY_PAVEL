@@ -46,7 +46,7 @@
 
 <div mat-dialog-actions>
   <button mat-raised-button
-          [disabled]="!editInfoForm.valid"
+          [disabled]="!editInfoForm.valid || !isChangeFields() && !avatar"
           (click)="changeInfo()">
     Change
   </button>

@@ -1,8 +1,6 @@
 package com.netcracker.backend.services;
 
 import com.netcracker.backend.model.User;
-import com.netcracker.backend.model.UserStatusEnum;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 

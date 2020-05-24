@@ -7,6 +7,8 @@ import {LSUser} from '../../model/ls-user.model';
 import {LocalStorageService} from '../../services/local-storage.service';
 import {Comment} from '../../model/comment.model';
 import {CommentService} from '../../services/comment.service';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-post',
@@ -27,7 +29,8 @@ export class PostComponent implements OnInit {
 
   constructor(private reactionService: ReactionService,
               private localStorageService: LocalStorageService,
-              private commentService: CommentService) {
+              private commentService: CommentService,
+              private spinner: NgxSpinnerService) {
   }
 
   private replaceHashtags() {
@@ -56,39 +59,52 @@ export class PostComponent implements OnInit {
   }
 
   changeLikeStatus() {
+    this.spinner.show();
     if (this.reactionData.dislikeStatus) {
       this.reactionService.changeLikeAndDislikeStatuses(this.authorizedUser.id, this.post.id,
-        this.reactionData.likeStatus, this.reactionData.dislikeStatus)
-        .subscribe((data) => {
-          this.reactionData = data;
-        });
+        this.reactionData.likeStatus, this.reactionData.dislikeStatus).pipe(finalize(() => {
+        this.spinner.hide();
+      })).subscribe((data) => {
+        this.reactionData = data;
+      });
     } else {
-      this.reactionService.changeLikeStatus(this.authorizedUser.id, this.post.id, this.reactionData.likeStatus).subscribe((data) => {
+      this.reactionService.changeLikeStatus(this.authorizedUser.id, this.post.id, this.reactionData.likeStatus).pipe(finalize(() => {
+        this.spinner.hide();
+      })).subscribe((data) => {
         this.reactionData = data;
       });
     }
   }
 
   changeDislikeStatus() {
+    this.spinner.show();
     if (this.reactionData.likeStatus) {
       this.reactionService.changeLikeAndDislikeStatuses(this.authorizedUser.id, this.post.id,
-        this.reactionData.likeStatus, this.reactionData.dislikeStatus)
+        this.reactionData.likeStatus, this.reactionData.dislikeStatus).pipe(finalize(() => {
+        this.spinner.hide();
+      }))
         .subscribe((data) => {
           this.reactionData = data;
         });
     } else {
-      this.reactionService.changeDislikeStatus(this.authorizedUser.id, this.post.id, this.reactionData.dislikeStatus)
+      this.reactionService.changeDislikeStatus(this.authorizedUser.id, this.post.id, this.reactionData.dislikeStatus).pipe(finalize(() => {
+        this.spinner.hide();
+      }))
         .subscribe((data) => {
           this.reactionData = data;
         });
     }
   }
 
-  sendComment(text) {
-    this.commentService.sendComment(this.post.id, this.authorizedUser.id, text).subscribe(() => {
-      this.commentService.getCommentByPostId(this.post.id).subscribe((comments) => {
+  sendComment(input) {
+    this.spinner.show();
+    this.commentService.sendComment(this.post.id, this.authorizedUser.id, input.value).subscribe(() => {
+      this.commentService.getCommentByPostId(this.post.id).pipe(finalize(() => {
+        this.spinner.hide();
+      })).subscribe((comments) => {
         this.comments = comments;
       });
     });
+    input.value = '';
   }
 }

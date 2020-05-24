@@ -1,7 +1,7 @@
 package com.netcracker.backend.controller;
 
 import com.netcracker.backend.model.SubscriptionsData;
-import com.netcracker.backend.services.SubscriptionsService;
+import com.netcracker.backend.services.impl.SubscriptionsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/subscriptions")
 public class SubscriptionsController {
 
-    private final SubscriptionsService subscriptionsService;
+    private final SubscriptionsServiceImpl subscriptionsService;
 
     @Autowired
-    public SubscriptionsController(SubscriptionsService subscriptionsService) {
+    public SubscriptionsController(SubscriptionsServiceImpl subscriptionsService) {
         this.subscriptionsService = subscriptionsService;
     }
 

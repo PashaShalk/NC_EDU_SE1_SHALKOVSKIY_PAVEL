@@ -1,7 +1,7 @@
 package com.netcracker.fapi.controller;
 
 import com.netcracker.fapi.model.ReportVM;
-import com.netcracker.fapi.services.ReportService;
+import com.netcracker.fapi.services.impl.ReportServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +12,10 @@ import java.util.List;
 @RequestMapping("api/reports")
 public class ReportController {
 
-    private final ReportService reportService;
+    private final ReportServiceImpl reportService;
 
     @Autowired
-    public ReportController(ReportService reportService) {
+    public ReportController(ReportServiceImpl reportService) {
         this.reportService = reportService;
     }
 
@@ -28,15 +28,21 @@ public class ReportController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/page/{page}/count/{count}")
-    public List<ReportVM> getAllUsers(@PathVariable Long page,
-                                      @PathVariable Long count) {
+    public List<ReportVM> getAllReports(@PathVariable Long page,
+                                        @PathVariable Long count) {
         return reportService.getAllReports(page, count);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/count")
-    public Long getCountAllUsers() {
+    public Long getCountAllReports() {
         return reportService.getCountAllReports();
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/unread/count")
+    public Long getCountUnreadReports() {
+        return reportService.getCountUnreadReports();
     }
 
     @PreAuthorize("hasRole('ADMIN')")

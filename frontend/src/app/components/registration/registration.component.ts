@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ConfirmValidParentMatcher, CustomValidator} from '../custom-validator';
-import {RegisteredUser} from '../../model/registered-user.model';
 
 @Component({
   selector: 'app-registration',

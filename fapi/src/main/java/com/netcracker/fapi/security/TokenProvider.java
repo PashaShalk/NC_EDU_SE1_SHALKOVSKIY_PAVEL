@@ -1,6 +1,5 @@
 package com.netcracker.fapi.security;
 
-//import com.sun.org.apache.xml.internal.security.algorithms.SignatureAlgorithm;
 import io.jsonwebtoken.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -51,10 +50,10 @@ public class TokenProvider implements Serializable {
                 .collect(Collectors.joining(","));
         return Jwts.builder()
                 .setSubject(authentication.getName())
-                .claim(com.netcracker.fapi.security.SecurityJwtConstants.AUTHORITIES_KEY, authorities)
-                .signWith(SignatureAlgorithm.HS256, com.netcracker.fapi.security.SecurityJwtConstants.SIGNING_KEY)
+                .claim(SecurityJwtConstants.AUTHORITIES_KEY, authorities)
+                .signWith(SignatureAlgorithm.HS256, SecurityJwtConstants.SIGNING_KEY)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + com.netcracker.fapi.security.SecurityJwtConstants.ACCESS_TOKEN_VALIDITY_SECONDS * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() + SecurityJwtConstants.ACCESS_TOKEN_VALIDITY_SECONDS * 1000))
                 .compact();
     }
 
@@ -64,10 +63,10 @@ public class TokenProvider implements Serializable {
     }
 
     public UsernamePasswordAuthenticationToken getAuthentication(final String token, final Authentication existingAuthentication, UserDetails userDetails) {
-        final JwtParser jwtParser = Jwts.parser().setSigningKey(com.netcracker.fapi.security.SecurityJwtConstants.SIGNING_KEY);
+        final JwtParser jwtParser = Jwts.parser().setSigningKey(SecurityJwtConstants.SIGNING_KEY);
         final Jws<Claims> claimsJws = jwtParser.parseClaimsJws(token);
         final Claims claims = claimsJws.getBody();
-        final Collection<? extends GrantedAuthority> authorities = Arrays.stream(claims.get(com.netcracker.fapi.security.SecurityJwtConstants.AUTHORITIES_KEY).toString().split(","))
+        final Collection<? extends GrantedAuthority> authorities = Arrays.stream(claims.get(SecurityJwtConstants.AUTHORITIES_KEY).toString().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
         return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);

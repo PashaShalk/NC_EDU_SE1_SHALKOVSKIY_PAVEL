@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -14,6 +13,6 @@ public class PostVM {
     private UserVM author;
     private String description;
     private Timestamp date;
-    private Set<Hashtag> hashtags = new HashSet<>();
-    private Set<String> photoURIs = new HashSet<>();
+    private Set<Hashtag> hashtags;
+    private Set<String> photoURIs;
 }

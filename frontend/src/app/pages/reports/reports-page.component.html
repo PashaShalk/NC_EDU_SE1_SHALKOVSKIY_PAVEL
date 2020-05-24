@@ -3,7 +3,7 @@
 
     <ng-container #report matColumnDef="post" sticky>
       <th mat-header-cell *matHeaderCellDef> Post</th>
-      <td #report mat-cell *matCellDef="let report">
+      <td mat-cell *matCellDef="let report">
         <button mat-icon-button (click)="openDialog(report.post)"
                 matTooltip="Show post"
                 matTooltipPosition="left"
@@ -12,11 +12,6 @@
         </button>
       </td>
     </ng-container>
-
-<!--    <ng-container matColumnDef="user" sticky>-->
-<!--      <th mat-header-cell *matHeaderCellDef> Post author </th>-->
-<!--      <td mat-cell *matCellDef="let element">{{element?.post?.author.nickname}}</td>-->
-<!--    </ng-container>-->
 
     <ng-container matColumnDef="date" sticky>
       <th mat-header-cell *matHeaderCellDef> Date </th>
@@ -31,13 +26,7 @@
     <ng-container matColumnDef="actions" sticky>
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let report">
-<!--        <button mat-icon-button (click)="changeUserStatus(report.post.author, paginator.pageIndex)"-->
-<!--                matTooltip="{{report?.post?.author?.status === 'BANNED'?'Unblock user':'Block user'}}"-->
-<!--                matTooltipPosition="below"-->
-<!--                [disabled]="!report.post">-->
-<!--          <mat-icon>{{report?.post?.author?.status === 'BANNED' ? 'lock' : 'lock_open'}}</mat-icon>-->
-<!--        </button>-->
-        <button mat-icon-button (click)="deletePost(report.post.id, report.post.author.id, paginator.pageIndex)"
+        <button mat-icon-button (click)="deletePost(report, paginator.pageIndex)"
                 matTooltip="Delete post"
                 matTooltipPosition="below"
                 [disabled]="!report.post">
@@ -52,7 +41,8 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr #row mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr #row mat-row *matRowDef="let row; columns: displayedColumns; let i = index"
+        [ngClass]="{'unchecked':reports[i].status === 'UNCHECKED', 'checked':reports[i].status === 'CHECKED'}"></tr>
   </table>
 
   <mat-paginator #paginator [pageSize]="pageSize"
@@ -60,6 +50,13 @@
                  (page)="update($event)"
                  showFirstLastButtons
                  class="mat-elevation-z8">
-
   </mat-paginator>
 </div>
+<ngx-spinner
+  bdColor = "rgba(0, 0, 0, 0.5)"
+  size = "large"
+  color = "#fff"
+  type = "ball-clip-rotate-multiple"
+  [fullScreen] = "true">
+  <p style="color: white" > Loading... </p>
+</ngx-spinner>

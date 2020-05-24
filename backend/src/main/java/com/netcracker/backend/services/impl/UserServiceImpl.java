@@ -9,7 +9,6 @@ import com.netcracker.backend.repositories.UserStatusRepository;
 import com.netcracker.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

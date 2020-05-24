@@ -1,11 +1,6 @@
 .example-card {
-  max-width: 500px;
+  width: 500px;
 }
-
-/*.example-header-image {*/
-/*  background-image: url("https://material.angular.io/assets/img/examples/shiba2.jpg");*/
-/*  background-size: cover;*/
-/*}*/
 
 :host {
   display: flex;
@@ -29,11 +24,3 @@
   outline: none;
   float: left;
 }
-
-/*.avatar {*/
-/*  object-fit: cover;*/
-/*  border-radius: 50%;*/
-/*  height: 40px;*/
-/*  width: 40px;*/
-/*  background-size: cover;*/
-/*}*/

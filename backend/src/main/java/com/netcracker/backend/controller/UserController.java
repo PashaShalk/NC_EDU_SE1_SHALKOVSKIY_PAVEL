@@ -2,7 +2,7 @@ package com.netcracker.backend.controller;
 
 import com.netcracker.backend.model.LoginData;
 import com.netcracker.backend.model.User;
-import com.netcracker.backend.services.UserService;
+import com.netcracker.backend.services.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +12,10 @@ import java.util.List;
 @RequestMapping("api/users")
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
 

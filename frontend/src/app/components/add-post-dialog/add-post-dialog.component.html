@@ -2,12 +2,10 @@
 
 <div mat-dialog-content>
   <div>
-<!--    #fileInput style="display: none;"-->
     <input type="file"
            accept=".png"
            (change)="handleFileInput($event.target.files)"
            multiple>
-<!--    <button mat-button color="primary" (click)="fileInput.click()">Pick File</button>-->
   </div>
   <mat-form-field appearance="outline">
     <mat-label>Description</mat-label>

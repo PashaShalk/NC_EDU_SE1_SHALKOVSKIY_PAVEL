@@ -53,6 +53,11 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
+    public Long getCountUnreadReports() {
+        return  reportRepository.countByStatus(ReportStatusEnum.UNCHECKED);
+    }
+
+    @Override
     public void markAsChecked(Long ID) {
         Optional<Report> reports = reportRepository.findById(ID);
         if (reports.isPresent()) {

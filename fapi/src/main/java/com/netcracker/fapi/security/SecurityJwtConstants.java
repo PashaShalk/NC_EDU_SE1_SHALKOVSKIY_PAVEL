@@ -1,7 +1,6 @@
 package com.netcracker.fapi.security;
 
 public class SecurityJwtConstants {
-
     public static final long ACCESS_TOKEN_VALIDITY_SECONDS = 5*60*60;
     public static final String SIGNING_KEY = "momentum";
     public static final String TOKEN_PREFIX = "Bearer";

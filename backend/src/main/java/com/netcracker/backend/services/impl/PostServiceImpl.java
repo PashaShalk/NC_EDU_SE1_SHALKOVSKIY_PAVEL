@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 @Service
 public class PostServiceImpl implements PostService {
 
-    private static final String HASHTAG_TEMPLATE = "\\B(\\#\\w+\\b)(?!;)";
+    private static final String HASHTAG_TEMPLATE = "(\\#\\w+\\b)(?!;)";
     private static final int HOURS_AGO = 12 * 60 * 60 * 1000;
 
     private final PostRepository postRepository;

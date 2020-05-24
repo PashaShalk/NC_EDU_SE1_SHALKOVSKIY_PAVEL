@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
-    AuthorizedUser getUserByLoginData(LoginData loginData);
 
     boolean registerUser(RegisteredUser registeredUser);
 

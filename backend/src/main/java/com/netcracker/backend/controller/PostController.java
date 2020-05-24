@@ -1,7 +1,7 @@
 package com.netcracker.backend.controller;
 
 import com.netcracker.backend.model.Post;
-import com.netcracker.backend.services.PostService;
+import com.netcracker.backend.services.impl.PostServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +11,10 @@ import java.util.List;
 @RequestMapping("api/posts")
 public class PostController {
 
-    private final PostService postService;
+    private final PostServiceImpl postService;
 
     @Autowired
-    public PostController(PostService postService) {
+    public PostController(PostServiceImpl postService) {
         this.postService = postService;
     }
 

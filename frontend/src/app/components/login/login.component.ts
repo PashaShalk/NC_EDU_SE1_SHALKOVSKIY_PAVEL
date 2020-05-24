@@ -11,7 +11,7 @@ import {LoginData} from '../../model/login-data.model';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private localStorageService: LocalStorageService) {
+  constructor() {
   }
 
   @Input()

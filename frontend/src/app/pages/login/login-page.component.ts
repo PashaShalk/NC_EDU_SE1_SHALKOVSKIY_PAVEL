@@ -3,6 +3,8 @@ import {LocalStorageService} from '../../services/local-storage.service';
 import {Router} from '@angular/router';
 import {UserService} from '../../services/user.service';
 import {LSUser} from '../../model/ls-user.model';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-page',
@@ -12,7 +14,8 @@ import {LSUser} from '../../model/ls-user.model';
 export class LoginPageComponent implements OnInit {
   constructor(private localStorageService: LocalStorageService,
               private userService: UserService,
-              private  router: Router) {
+              private  router: Router,
+              private spinner: NgxSpinnerService) {
   }
 
   rememberMe: boolean;
@@ -27,40 +30,34 @@ export class LoginPageComponent implements OnInit {
   }
 
   login(event) {
-    this.userService.getToken(event).subscribe((value) => {
-      console.log(value.token);
+    this.loginError = false;
+    this.bannedUser = false;
+    this.spinner.show();
+    this.userService.getToken(event).pipe(finalize(() => {
+      this.spinner.hide();
+    })).subscribe((value) => {
       if (value) {
         this.localStorageService.setToken(value.token);
-
         this.userService.getUserByEmail(event.email).subscribe((user) => {
-          console.log(user);
           if (!user) {
             this.loginError = true;
             this.bannedUser = false;
           } else if (user.status === 'BANNED') {
             this.loginError = false;
             this.bannedUser = true;
+            this.localStorageService.clear();
           } else {
             this.localStorageService.setAuthorizedUser(new LSUser(user.id, user.role));
             this.userService.setLogin();
             this.router.navigate(['/feed']);
           }
+        }, () => {
+          console.log('toleban');
         });
-        // this.userService.authorizeUser(event).subscribe((user) => {
-        //   console.log(user);
-        //   if (!user) {
-        //     this.loginError = true;
-        //     this.bannedUser = false;
-        //   } else if (user.status === 'BANNED') {
-        //     this.loginError = false;
-        //     this.bannedUser = true;
-        //   } else {
-        //     this.localStorageService.setAuthorizedUser(new LSUser(user.id, user.role));
-        //     this.userService.setLogin();
-        //     this.router.navigate(['/feed']);
-        //   }
-        // });
       }
+    }, () => {
+      this.loginError = true;
+      this.bannedUser = false;
     });
   }
 }

@@ -8,10 +8,6 @@ table {
   min-width: 500px;
 }
 
-.mat-row:hover {
-  background-color: #F0F0F0;
-}
-
-.checked {
-  background-color: gray;
+.unchecked {
+  background-color: #d0ffbf;
 }

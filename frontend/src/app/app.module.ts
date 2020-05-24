@@ -52,6 +52,8 @@ import { AccountPostComponent } from './components/account-post/account-post.com
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {APIInterceptor} from './interceptors/api-interceptor';
 import {AuthorizedGuard} from './guards/authorized.guard';
+import {MatCarouselModule} from '@ngmodule/material-carousel';
+import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,7 @@ import {AuthorizedGuard} from './guards/authorized.guard';
     AddPostDialogComponent,
     EditInfoDialogComponent,
     AccountPostComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -103,7 +106,9 @@ import {AuthorizedGuard} from './guards/authorized.guard';
     MatTooltipModule,
     InfiniteScrollModule,
     NgxSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCarouselModule,
+    NgbCarouselModule,
   ],
   providers: [NoAuthorizedGuard, AuthorizedGuard, UserGuard, AdminGuard, APIInterceptor, {
     provide: HTTP_INTERCEPTORS,

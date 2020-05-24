@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -65,46 +67,62 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post[] getUserPosts(String nickname, Integer page, Integer count) {
+    public List<PostVM> getUserPosts(String nickname, Integer page, Integer count) {
         Post[] posts = restTemplate.getForEntity(backendURI + "/user/" + nickname
                         + "/page/" + page + "/count/" + count,
                 Post[].class).getBody();
+        List<PostVM> postsVM = new ArrayList<>();
         if (posts != null) {
             getPostsPhotosURIs(posts);
+            for (Post post : posts) {
+                postsVM.add(convertToPostVM(post));
+            }
         }
-        return posts;
+        return postsVM;
     }
 
     @Override
-    public Post[] getUserFeed(Long ID, Integer page, Integer count) {
+    public List<PostVM> getUserFeed(Long ID, Integer page, Integer count) {
         Post[] posts = restTemplate.getForEntity(backendURI + "/feed/user/" + ID
                         + "/page/" + page + "/count/" + count,
                 Post[].class).getBody();
+        List<PostVM> postsVM = new ArrayList<>();
         if (posts != null) {
             getPostsPhotosURIs(posts);
+            for (Post post : posts) {
+                postsVM.add(convertToPostVM(post));
+            }
         }
-        return posts;
+        return postsVM;
     }
 
     @Override
-    public Post[] getAllPostsInTwelveHours(Integer page, Integer count) {
+    public List<PostVM> getAllPostsInTwelveHours(Integer page, Integer count) {
         Post[] posts = restTemplate.getForEntity(backendURI + "/feed/page/" + page + "/count/" + count,
                 Post[].class).getBody();
+        List<PostVM> postsVM = new ArrayList<>();
         if (posts != null) {
             getPostsPhotosURIs(posts);
+            for (Post post : posts) {
+                postsVM.add(convertToPostVM(post));
+            }
         }
-        return posts;
+        return postsVM;
     }
 
     @Override
-    public Post[] getPostsByHashtag(String hashtag, Integer page, Integer count) {
+    public List<PostVM> getPostsByHashtag(String hashtag, Integer page, Integer count) {
         Post[] posts = restTemplate.getForEntity(backendURI + "/feed/hashtag/" + hashtag
                         + "/page/" + page + "/count/" + count,
                 Post[].class).getBody();
+        List<PostVM> postsVM = new ArrayList<>();
         if (posts != null) {
             getPostsPhotosURIs(posts);
+            for (Post post : posts) {
+                postsVM.add(convertToPostVM(post));
+            }
         }
-        return posts;
+        return postsVM;
     }
 
     @Override
@@ -117,18 +135,8 @@ public class PostServiceImpl implements PostService {
     private void getPostsPhotosURIs(Post[] posts) {
         for (Post post : posts) {
             getPostPhotosURIs(post);
-//            File[] images = new File(uploadPath +
-//                    "/" + post.getAuthor().getID() +
-//                    "/" + post.getID()).listFiles();
-//            if (images != null) {
-//                for (int i = 0; i < images.length; i++) {
-//                    post.getPhotoURIs().add(fapiURI
-//                            + "/user/" + post.getAuthor().getID()
-//                            + "/post/" + post.getID()
-//                            + "/image/" + i);
-//                }
-            }
         }
+    }
 
     private void getPostPhotosURIs(Post post) {
         File[] images = new File(uploadPath

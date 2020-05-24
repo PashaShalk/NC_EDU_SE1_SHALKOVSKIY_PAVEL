@@ -1,6 +1,7 @@
 package com.netcracker.fapi.services.impl;
 
-import com.netcracker.fapi.model.*;
+import com.netcracker.fapi.model.Report;
+import com.netcracker.fapi.model.ReportVM;
 import com.netcracker.fapi.services.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,6 +35,11 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public Long getCountAllReports() {
         return restTemplate.getForEntity(backendURI + "/count", Long.class).getBody();
+    }
+
+    @Override
+    public Long getCountUnreadReports() {
+        return restTemplate.getForEntity(backendURI + "/unread/count", Long.class).getBody();
     }
 
     @Override

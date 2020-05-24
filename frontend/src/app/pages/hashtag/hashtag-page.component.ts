@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {PostService} from '../../services/post.service';
 import {Post} from '../../model/post.model';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-hashtag-page',
@@ -11,7 +13,8 @@ import {Post} from '../../model/post.model';
 export class HashtagPageComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
-              private postService: PostService) {
+              private postService: PostService,
+              private spinner: NgxSpinnerService) {
   }
 
   posts: Post[];
@@ -22,10 +25,13 @@ export class HashtagPageComponent implements OnInit {
   hashtag: string;
 
   ngOnInit(): void {
+    this.spinner.show();
     this.page = 0;
     this.activatedRoute.params.subscribe((params) => {
       this.hashtag = params.hashtag;
-      this.postService.getPostsByHashtag(params.hashtag, 0, this.countOnPage).subscribe((posts) => {
+      this.postService.getPostsByHashtag(params.hashtag, 0, this.countOnPage).pipe(finalize(() => {
+        this.spinner.hide();
+      })).subscribe((posts) => {
         this.posts = posts;
       });
     });
@@ -40,8 +46,10 @@ export class HashtagPageComponent implements OnInit {
 
   loadNextPosts() {
     this.page++;
-
-    this.postService.getPostsByHashtag(this.hashtag, this.page, this.countOnPage).subscribe((posts) => {
+    this.spinner.show();
+    this.postService.getPostsByHashtag(this.hashtag, this.page, this.countOnPage).pipe(finalize(() => {
+      this.spinner.hide();
+    })).subscribe((posts) => {
       const newPosts = posts;
 
       if (newPosts.length === 0) {

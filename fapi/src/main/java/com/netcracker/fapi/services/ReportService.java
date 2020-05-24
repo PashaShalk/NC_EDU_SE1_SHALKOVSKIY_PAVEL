@@ -15,4 +15,6 @@ public interface ReportService {
     void markAsChecked(Long ID);
 
     void markAsUnchecked(Long ID);
+
+    Long getCountUnreadReports();
 }

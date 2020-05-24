@@ -1,24 +1,24 @@
 package com.netcracker.fapi.controller;
 
-import com.netcracker.fapi.model.Post;
-import com.netcracker.fapi.services.PostService;
+import com.netcracker.fapi.model.PostVM;
+import com.netcracker.fapi.services.impl.PostServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/posts")
 public class PostController {
 
-    private final PostService postService;
+    private final PostServiceImpl postService;
 
     @Autowired
-    public PostController(PostService postService) {
+    public PostController(PostServiceImpl postService) {
         this.postService = postService;
     }
 
@@ -30,8 +30,6 @@ public class PostController {
         postService.createPost(images, ID, description);
     }
 
-//    @PreAuthorize("isAuthenticated()")
-//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping("/user/{userID}/post/{postID}/image/{imageNumber}")
     public ResponseEntity<byte[]> getAvatar(@PathVariable Long userID,
                                             @PathVariable Integer postID,
@@ -41,7 +39,7 @@ public class PostController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/user/{nickname}/page/{page}/count/{count}")
-    public Post[] getUserPosts(@PathVariable String nickname,
+    public List<PostVM> getUserPosts(@PathVariable String nickname,
                                @PathVariable Integer page,
                                @PathVariable Integer count) {
         return postService.getUserPosts(nickname, page, count);
@@ -49,7 +47,7 @@ public class PostController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/feed/user/{ID}/page/{page}/count/{count}")
-    public Post[] getUserFeed(@PathVariable Long ID,
+    public List<PostVM> getUserFeed(@PathVariable Long ID,
                               @PathVariable Integer page,
                               @PathVariable Integer count) {
         return postService.getUserFeed(ID, page, count);
@@ -57,16 +55,16 @@ public class PostController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/feed/page/{page}/count/{count}")
-    public Post[] getAllPostsIn12Hours(@PathVariable Integer page,
+    public List<PostVM> getAllPostsIn12Hours(@PathVariable Integer page,
                                        @PathVariable Integer count) {
         return postService.getAllPostsInTwelveHours(page, count);
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/hashtag/{hashtag}/page/{page}/count/{count}")
-    public Post[] getPostsByHashtag(@PathVariable String hashtag,
-                                    @PathVariable Integer page,
-                                    @PathVariable Integer count) {
+    public List<PostVM> getPostsByHashtag(@PathVariable String hashtag,
+                                          @PathVariable Integer page,
+                                          @PathVariable Integer count) {
         return postService.getPostsByHashtag(hashtag, page, count);
     }
 

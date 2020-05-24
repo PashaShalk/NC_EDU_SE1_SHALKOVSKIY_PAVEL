@@ -1,7 +1,6 @@
 package com.netcracker.fapi.services.impl;
 
 import com.netcracker.fapi.model.Comment;
-import com.netcracker.fapi.model.Post;
 import com.netcracker.fapi.services.CommentService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;

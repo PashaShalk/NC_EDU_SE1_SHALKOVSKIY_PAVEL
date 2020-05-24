@@ -3,11 +3,10 @@ package com.netcracker.fapi.controller;
 import com.netcracker.fapi.model.RegisteredUser;
 import com.netcracker.fapi.model.UserInfo;
 import com.netcracker.fapi.model.UserVM;
-import com.netcracker.fapi.services.UserService;
+import com.netcracker.fapi.services.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,10 +18,10 @@ import java.util.List;
 @RequestMapping("api/users")
 public class UserController {
 
-    public final UserService userService;
+    public final UserServiceImpl userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
 
@@ -82,8 +81,6 @@ public class UserController {
         return HttpStatus.OK;
     }
 
-//    @PreAuthorize("isAuthenticated()")
-//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping("/avatar/{ID}")
     public ResponseEntity<byte[]> getAvatar(@PathVariable Long ID) throws IOException {
         return userService.getAvatar(ID);

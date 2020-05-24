@@ -3,6 +3,8 @@ import {Post} from '../../model/post.model';
 import {PostService} from '../../services/post.service';
 import {LSUser} from '../../model/ls-user.model';
 import {LocalStorageService} from '../../services/local-storage.service';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-feed-page',
@@ -12,7 +14,8 @@ import {LocalStorageService} from '../../services/local-storage.service';
 export class FeedPageComponent implements OnInit {
 
   constructor(private postService: PostService,
-              private localStorageService: LocalStorageService) {
+              private localStorageService: LocalStorageService,
+              private spinner: NgxSpinnerService) {
   }
 
   posts: Post[];
@@ -23,16 +26,19 @@ export class FeedPageComponent implements OnInit {
   authorizedUser: LSUser;
 
   ngOnInit(): void {
+    this.spinner.show();
     this.authorizedUser = this.localStorageService.getAuthorizedUser();
     this.page = 0;
     if (this.authorizedUser.role === 'USER') {
-      console.log('user');
-      this.postService.getSubscriptionsPosts(this.authorizedUser.id, this.page, this.countOnPage).subscribe((posts) => {
+      this.postService.getSubscriptionsPosts(this.authorizedUser.id, this.page, this.countOnPage).pipe(finalize(() => {
+        this.spinner.hide();
+      })).subscribe((posts) => {
         this.posts = posts;
       });
     } else {
-      console.log('admin');
-      this.postService.getAllPostsIn12Hours(this.page, this.countOnPage).subscribe((posts) => {
+      this.postService.getAllPostsIn12Hours(this.page, this.countOnPage).pipe(finalize(() => {
+        this.spinner.hide();
+      })).subscribe((posts) => {
         this.posts = posts;
       });
     }
@@ -46,10 +52,13 @@ export class FeedPageComponent implements OnInit {
   }
 
   loadNextPosts() {
+    this.spinner.show();
     this.page++;
 
     if (this.authorizedUser.role === 'USER') {
-      this.postService.getSubscriptionsPosts(this.authorizedUser.id, this.page, this.countOnPage).subscribe((posts) => {
+      this.postService.getSubscriptionsPosts(this.authorizedUser.id, this.page, this.countOnPage).pipe(finalize(() => {
+        this.spinner.hide();
+      })).subscribe((posts) => {
         const newPosts = posts;
 
         if (newPosts.length === 0) {
@@ -59,7 +68,9 @@ export class FeedPageComponent implements OnInit {
         this.notscrolly = true;
       });
     } else {
-      this.postService.getAllPostsIn12Hours(this.page, this.countOnPage).subscribe((posts) => {
+      this.postService.getAllPostsIn12Hours(this.page, this.countOnPage).pipe(finalize(() => {
+        this.spinner.hide();
+      })).subscribe((posts) => {
         const newPosts = posts;
 
         if (newPosts.length === 0) {

@@ -1,7 +1,7 @@
 package com.netcracker.fapi.controller;
 
 import com.netcracker.fapi.model.SubscriptionsData;
-import com.netcracker.fapi.services.SubscriptionsService;
+import com.netcracker.fapi.services.impl.SubscriptionsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/subscriptions")
 public class SubscriptionsController {
 
-    private final SubscriptionsService subscriptionsService;
+    private final SubscriptionsServiceImpl subscriptionsService;
 
     @Autowired
-    public SubscriptionsController(SubscriptionsService subscriptionsService) {
+    public SubscriptionsController(SubscriptionsServiceImpl subscriptionsService) {
         this.subscriptionsService = subscriptionsService;
     }
 

@@ -44,22 +44,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public AuthorizedUser getUserByLoginData(LoginData loginData) {
-        User user = restTemplate.postForEntity(backendURI + "/authorization",
-                loginData,
-                User.class).getBody();
-
-        if (user != null) {
-            return AuthorizedUser.builder()
-                    .ID(user.getID())
-                    .role(user.getRole().getRole())
-                    .status(user.getStatus().getStatus())
-                    .build();
-        }
-        return null;
-    }
-
-    @Override
     public boolean registerUser(RegisteredUser registeredUser) {
         if (registeredUser.getPassword().equals(registeredUser.getConfirmPassword())) {
             User user = User.builder()
@@ -157,6 +141,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 .getBody());
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = findByEmail(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
+    }
+
     public UserVM convertToUserVM(User user) {
         if (user != null) {
             return UserVM.builder()
@@ -173,22 +166,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return null;
     }
 
+    private User findByEmail(String email) {
+        return restTemplate.getForEntity(backendURI + "/email/" + email, User.class).getBody();
+    }
+
     private Set<SimpleGrantedAuthority> getAuthority(User user) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().getRole()));
         return authorities;
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = findByEmail(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("Invalid username or password.");
-        }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
-    }
-
-    private User findByEmail(String email) {
-        return restTemplate.getForEntity(backendURI + "/email/" + email, User.class).getBody();
     }
 }

@@ -5,7 +5,6 @@ import com.netcracker.fapi.model.RegisteredUser;
 import com.netcracker.fapi.security.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/token")
 public class AuthenticationController {
@@ -30,7 +28,6 @@ public class AuthenticationController {
         this.tokenProvider = tokenProvider;
     }
 
-    @PreAuthorize("isAnonymous()")
     @PostMapping("/generate-token")
     public ResponseEntity<AuthToken> register(@RequestBody RegisteredUser registeredUser){
         final Authentication authentication = authenticationManager.authenticate(

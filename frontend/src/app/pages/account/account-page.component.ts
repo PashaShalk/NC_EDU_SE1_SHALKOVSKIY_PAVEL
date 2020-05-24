@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../../model/user.model';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../services/user.service';
 import {NgxSpinnerService} from 'ngx-spinner';
-import {SubscriptionsData} from '../../model/subscriptions-data.model';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-account-page',
@@ -14,14 +14,17 @@ export class AccountPageComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private userService: UserService,
-              private router: Router) {
+              private spinner: NgxSpinnerService) {
   }
 
   user: User;
 
   ngOnInit(): void {
+    this.spinner.show();
     this.activatedRoute.params.subscribe((params) => {
-      this.userService.getUserByNickname(params.nickname).subscribe((user) => {
+      this.userService.getUserByNickname(params.nickname).pipe(finalize(() => {
+        this.spinner.hide();
+      })).subscribe((user) => {
         this.user = user;
       });
     });

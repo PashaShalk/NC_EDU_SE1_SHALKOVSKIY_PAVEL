@@ -25,16 +25,16 @@ export class UserService {
     this.$login.next();
   }
 
-  // authorizeUser(loginData: LoginData) {
-  //   return this.http.post<AuthorizedUser>('/api/users/authorization', loginData);
-  // }
-
   registerUser(user: RegisteredUser) {
     return this.http.post<boolean>('/api/users/registration', user);
   }
 
   getUserByID(id: number) {
     return this.http.get<User>('/api/users/id/' + id);
+  }
+
+  getAvatar(id: number) {
+    return this.http.get('/api/users/avatar/' + id, { responseType: 'blob' });
   }
 
   getUserByNickname(nickname: string) {
@@ -74,9 +74,6 @@ export class UserService {
   getUserByEmail(email: string) {
     return this.http.get<AuthorizedUser>('/api/users/email/' + email);
   }
-  // authorizeUser(loginData: LoginData) {
-  //   return this.http.post<AuthorizedUser>('/api/users/authorization', loginData);
-  // }
 }
 
 export interface AuthToken {
