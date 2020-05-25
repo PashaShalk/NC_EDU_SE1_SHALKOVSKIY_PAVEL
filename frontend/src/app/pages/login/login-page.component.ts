@@ -18,15 +18,10 @@ export class LoginPageComponent implements OnInit {
               private spinner: NgxSpinnerService) {
   }
 
-  rememberMe: boolean;
   loginError: boolean;
   bannedUser: boolean;
 
   ngOnInit(): void {
-  }
-
-  setRememberMe(event) {
-    this.rememberMe = event;
   }
 
   login(event) {
@@ -52,7 +47,6 @@ export class LoginPageComponent implements OnInit {
             this.router.navigate(['/feed']);
           }
         }, () => {
-          console.log('toleban');
         });
       }
     }, () => {

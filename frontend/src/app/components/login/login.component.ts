@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoginMatcher} from '../custom-validator';
-import {LocalStorageService} from '../../services/local-storage.service';
 import {LoginData} from '../../model/login-data.model';
 
 @Component({
@@ -23,22 +22,16 @@ export class LoginComponent implements OnInit {
   @Output()
   login: EventEmitter<LoginData> = new EventEmitter();
 
-  @Output()
-  remember: EventEmitter<boolean> = new EventEmitter();
-
   hide: boolean;
-  rememberMe: boolean;
   loginForm: FormGroup;
   loginMatcher = new LoginMatcher();
 
   _login() {
-    this.remember.next(this.rememberMe);
     this.login.next(this.loginForm.value);
   }
 
   ngOnInit(): void {
     this.hide = true;
-    this.rememberMe = false;
 
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required,

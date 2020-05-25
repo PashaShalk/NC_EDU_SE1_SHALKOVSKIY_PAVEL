@@ -1,10 +1,13 @@
 <h1 mat-dialog-title>Add post</h1>
 
+<label for="file">Choose files</label>
 <div mat-dialog-content>
   <div>
     <input type="file"
+           id="file"
            accept=".png"
            (change)="handleFileInput($event.target.files)"
+           style="visibility: hidden"
            multiple>
   </div>
   <mat-form-field appearance="outline">
