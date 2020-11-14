@@ -1,6 +1,5 @@
 .example-card {
   width: 500px;
-
 }
 
 :host {
@@ -20,7 +19,7 @@
 
 .comment {
   border: none;
-  width: 87%;
+  width: 85%;
   margin-top: 25px;
   outline: none;
   float: left;
